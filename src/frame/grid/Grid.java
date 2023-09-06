@@ -247,7 +247,13 @@ public class Grid extends JPanel{
 		for(Integer node : lastPath) {
 			this.grid[node/grid.length][node%grid.length].setLabelText("");
 			this.grid[node/grid.length][node%grid.length].setBorder(BorderFactory.createLineBorder(Color.black));
-			this.grid[node/grid.length][node%grid.length].setBackground(Color.white);
+			
+			if(this.grid[node/grid.length][node%grid.length].isWall) {
+				this.grid[node/grid.length][node%grid.length].setBackground(Color.black);
+			}
+			else {
+				this.grid[node/grid.length][node%grid.length].setBackground(Color.white);
+			}
 			lastPath = null;
 		}
 	}
