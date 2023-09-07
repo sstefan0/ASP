@@ -82,7 +82,7 @@ public class Grid extends JPanel{
 	public void resetGrid() {
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[i].length; j++) {
-				if(grid[i][j].isWall) {
+				if(grid[i][j].isWall()) {
 					grid[i][j].changeState();
 				}
 			}
@@ -106,16 +106,16 @@ public class Grid extends JPanel{
 		
 		for(int i=0; i<grid.length; i++) {
 			for(int j=0; j<grid[i].length; j++) {
-				if(j+1 < grid.length && !grid[i][j+1].isWall) {
+				if(j+1 < grid.length && !grid[i][j+1].isWall()) {
 					adjacencyMatrix[i*grid[i].length + j][i*grid[i].length + j + 1] = 1;
 				}
-				if(i+1 < grid.length && !grid[i+1][j].isWall) {
+				if(i+1 < grid.length && !grid[i+1][j].isWall()) {
 					adjacencyMatrix[i*grid[i].length + j][(i+1)*grid[i].length + j] = 1;
 				}
-				if(j-1 >= 0 && !grid[i][j-1].isWall) {
+				if(j-1 >= 0 && !grid[i][j-1].isWall()) {
 					adjacencyMatrix[i*grid[i].length + j][i*grid[i].length + j -1] = 1;
 				}
-				if(i-1 >= 0 && !grid[i-1][j].isWall) {
+				if(i-1 >= 0 && !grid[i-1][j].isWall()) {
 					adjacencyMatrix[i*grid[i].length + j][(i-1)*grid[i].length + j] = 1;
 
 				}
@@ -248,7 +248,7 @@ public class Grid extends JPanel{
 			this.grid[node/grid.length][node%grid.length].setLabelText("");
 			this.grid[node/grid.length][node%grid.length].setBorder(BorderFactory.createLineBorder(Color.black));
 			
-			if(this.grid[node/grid.length][node%grid.length].isWall) {
+			if(this.grid[node/grid.length][node%grid.length].isWall()) {
 				this.grid[node/grid.length][node%grid.length].setBackground(Color.black);
 			}
 			else {

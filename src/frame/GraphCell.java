@@ -20,7 +20,7 @@ import listeners.GridCellMouseListener;
 public class GraphCell extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	public boolean isWall;
+	private boolean wall;
 	private int x;
 	private int y;
 	private JLabel label = null;
@@ -30,7 +30,7 @@ public class GraphCell extends JPanel {
 		setLayout(new BorderLayout());
 		x = i;
 		y = j;
-		isWall = false;
+		wall = false;
 		setMaximumSize(new Dimension(15, 15));
 		setMinimumSize(new Dimension(15, 15));
 		setPreferredSize(new Dimension(15, 15));
@@ -44,9 +44,9 @@ public class GraphCell extends JPanel {
 	}
 
 	public void changeState() {
-		isWall = !isWall;
+		wall = !wall;
 		Grid grid = (Grid) getParent();
-		if(isWall) {
+		if(wall) {
 			setBackground(Color.black);
 			GraphCell startingPoint = grid.getStartingPoint();
 			GraphCell endingPoint = grid.getEndPoint();
@@ -61,7 +61,7 @@ public class GraphCell extends JPanel {
 		Grid grid = (Grid) getParent();
 		
 		try {
-			if(isWall) {
+			if(wall) {
 				throw new Exception("Can't start from a wall!");
 			}
 			
@@ -85,7 +85,7 @@ public class GraphCell extends JPanel {
 	public void setEndingPoint() {
 		Grid grid = (Grid) getParent();
 		try {
-			if(isWall) {
+			if(wall) {
 				throw new Exception("Can't set finish on a wall!");
 			}
 			
@@ -121,5 +121,8 @@ public class GraphCell extends JPanel {
 	
 	public ImageIcon getLabelIcon() {
 		return (ImageIcon)label.getIcon();
+	}
+	public boolean isWall() {
+		return wall;
 	}
 }
