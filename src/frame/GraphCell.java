@@ -62,13 +62,17 @@ public class GraphCell extends JPanel {
 		
 		try {
 			if(isWall) {
-				throw new Exception("Cannot start from a wall!");
+				throw new Exception("Can't start from a wall!");
+			}
+			
+			if(grid.getEndPoint() == this) {
+				throw new Exception("Can't start and finish on the same cell!");
 			}
 			
 			setLabelIcon(new ImageIcon(toolkit.getImage("image/racing-car.png").getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 			
 			GraphCell oldStartingPoint = grid.getStartingPoint();
-			if(oldStartingPoint != null) {
+			if(oldStartingPoint != null && oldStartingPoint != this) {
 				oldStartingPoint.setLabelIcon(null);
 			}
 			
@@ -82,13 +86,17 @@ public class GraphCell extends JPanel {
 		Grid grid = (Grid) getParent();
 		try {
 			if(isWall) {
-				throw new Exception("Can not end on a wall!");
+				throw new Exception("Can't set finish on a wall!");
+			}
+			
+			if(grid.getStartingPoint() == this) {
+				throw new Exception("Can't start and finish on the same cell!");
 			}
 		
 			setLabelIcon(new ImageIcon(toolkit.getImage("image/checkered-flag.png").getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 			
 			GraphCell oldEndPoint = grid.getEndPoint();
-			if(oldEndPoint != null) {
+			if(oldEndPoint != null && oldEndPoint != this) {
 				oldEndPoint.setLabelIcon(null);
 			}
 			
